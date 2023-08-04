@@ -5,13 +5,15 @@ import { authActions } from '../../store/actions';
 import { RegisterRequestInterface } from 'src/app/auth/types/registerRequest.interface';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { selectIsSubmitting } from '../../store/reducers';
+import { selectIsSubmitting, selectValidationErrors } from '../../store/reducers';
+import { combineLatest } from 'rxjs';
+import { BackendErrorMessages } from 'src/app/shared/components/backendErrorMessages/backendErrorMessages.component';
 
 @Component({
   selector: 'mc-register',
   templateUrl: './register.component.html',
   standalone: true,
-  imports: [ReactiveFormsModule, RouterLink, CommonModule],
+  imports: [ReactiveFormsModule, RouterLink, CommonModule, BackendErrorMessages],
 })
 export class RegisterComponent {
     form = this.fb.nonNullable.group({
@@ -20,7 +22,10 @@ export class RegisterComponent {
         password: ['', Validators.required],
     });
 
-    isSubmitting$ = this.store.select(selectIsSubmitting);
+    data$ = combineLatest({
+        isSubmitting: this.store.select(selectIsSubmitting),
+        backendErrors: this.store.select(selectValidationErrors),
+    })
 
     constructor(
         private fb:FormBuilder,

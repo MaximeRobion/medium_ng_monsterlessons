@@ -7,6 +7,8 @@ import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { isDevMode } from '@angular/core';
 import { authFeatureKey, authReducer } from "./app/auth/store/reducers";
 import { provideHttpClient } from "@angular/common/http";
+import { provideEffects } from '@ngrx/effects';
+import * as authEffects from './app/auth/store/effects';
 
 bootstrapApplication(AppComponent, {providers: [
     provideHttpClient(),
@@ -14,4 +16,5 @@ bootstrapApplication(AppComponent, {providers: [
     provideStore(),
     provideState(authFeatureKey, authReducer),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode(), autoPause: true, trace: false, traceLimit: 75 }),
+    provideEffects(authEffects)
 ]});

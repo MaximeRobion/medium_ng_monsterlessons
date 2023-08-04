@@ -4,7 +4,6 @@ import { Store } from '@ngrx/store';
 import { register } from '../../store/actions';
 import { RegisterRequestInterface } from 'src/app/auth/types/registerRequest.interface';
 import { RouterLink } from '@angular/router';
-import { AuthStateInterface } from '../../types/authState.interface';
 import { CommonModule } from '@angular/common';
 import { selectIsSubmitting } from '../../store/reducers';
 
@@ -23,7 +22,10 @@ export class RegisterComponent {
 
     isSubmitting$ = this.store.select(selectIsSubmitting);
 
-    constructor(private fb:FormBuilder, private store: Store<{auth: AuthStateInterface}>) {}
+    constructor(
+        private fb:FormBuilder,
+        private store: Store,
+        ) {}
 
     onSubmit() {
         console.log('form', this.form.getRawValue());

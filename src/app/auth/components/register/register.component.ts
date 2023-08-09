@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
-import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
-import { Store } from '@ngrx/store';
+import { Component } from "@angular/core";
+import { FormBuilder, Validators, ReactiveFormsModule } from "@angular/forms";
+import { Store } from "@ngrx/store";
 import { authActions } from '../../store/actions';
 import { RegisterRequestInterface } from 'src/app/auth/types/registerRequest.interface';
-import { RouterLink } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import { RouterLink } from "@angular/router";
+import { CommonModule } from "@angular/common";
 import { selectIsSubmitting, selectValidationErrors } from '../../store/reducers';
 import { combineLatest } from 'rxjs';
 import { BackendErrorMessages } from 'src/app/shared/components/backendErrorMessages/backendErrorMessages.component';
